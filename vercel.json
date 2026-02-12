@@ -1,7 +1,12 @@
 {
-  "rewrites": [
+  "functions": {
+    "api/check-geo.js": {
+      "runtime": "vercel-nodejs@18.x"
+    }
+  },
+  "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/",
       "destination": "/api/check-geo",
       "has": [
         {
@@ -9,8 +14,8 @@
           "key": "x-vercel-ip-country",
           "value": "(?!PT|ES|SA).*"
         }
-      ]
+      ],
+      "permanent": false
     }
   ]
 }
-
