@@ -15,7 +15,35 @@
   <script src="https://quge5.com/88/tag.min.js" data-zone="210705" async data-cfasync="false"></script>
 </head> 
  <body>
-  
+  <script>
+  async function checkGeo() {
+    try {
+      // On utilise une API gratuite et rapide pour connaître le pays
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      
+      // Liste des pays autorisés : Portugal (PT), Espagne (ES), Arabie Saoudite (SA)
+      const allowed = ['PT', 'ES', 'SA'];
+      
+      if (!allowed.includes(data.country_code)) {
+        // Si le pays n'est pas autorisé, on remplace tout le contenu de la page
+        document.documentElement.innerHTML = `
+          <body style="background:#000; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; text-align:center; margin:0;">
+            <div style="padding:20px; border:1px solid #333; border-radius:15px; background:#111; max-width:400px;">
+              <h1 style="color:#ff4d4d;">ACCÈS RESTREINT 🚫</h1>
+              <p>Ce jeu est disponible uniquement au <b>Portugal 🇵🇹</b>, en <b>Espagne 🇪🇸</b> et en <b>Arabie Saoudite 🇸🇦</b>.</p>
+              <p>Veuillez activer votre <b>VPN</b> sur l'un de ces pays pour jouer.</p>
+              <button onclick="window.location.reload()" style="background:#ff4d4d; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">J'ai activé mon VPN</button>
+            </div>
+          </body>`;
+      }
+    } catch (error) {
+      console.error("Erreur de vérification géo");
+    }
+  }
+  checkGeo();
+</script>
+
   <!-- ===== NAVIGATION ===== -->
   <nav>
     <div class="nav-container">
