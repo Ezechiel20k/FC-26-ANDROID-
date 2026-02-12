@@ -1,0 +1,18 @@
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "country",
+          "value": ["PT", "ES", "SA"]
+        }
+      ],
+      "continue": true
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/blocked.html"
+    }
+  ]
+}
